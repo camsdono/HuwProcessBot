@@ -8,6 +8,6 @@ module.exports = {
      * @param {Client} client 
      */
     execute(client) {
-    console.log("I am ready")
+        console.log("The bot is online...")
     }
 }

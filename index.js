@@ -1,5 +1,5 @@
+const { Client, Collection } = require('discord.js');
 const Discord = require('discord.js')
-const { Client } = require('discord.js')
 const { Token } = require('./config.json');
 
 const client = new Discord.Client({
@@ -8,16 +8,9 @@ const client = new Discord.Client({
     ]
 })
 
-
-
-
-// For error handling, makes it so your bot doesnt crash when you get an error with a command (not needed)
-process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
-	
-	
-});
+client.commands = new Collection()
 
 require("./Handlers/Events")(client)
+require("./Handlers/Commands")(client)
 
-client.login(Token)
+client.login(Token);

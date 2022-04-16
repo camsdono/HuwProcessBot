@@ -10,15 +10,15 @@ const Ascii = require("ascii-table");
  */
 
 module.exports = async (client) => {
-    const Table = new Ascii("Command Loaded");
+    const Table = new Ascii("Commands Loaded");
 
     CommandsArray = [];
 
-    (await PG(`${process.cwd()}/Commands/*/*.js`)).map(async (file) => {
+    (await PG(`${process.cwd()}/commands/*.js`)).map(async (file) => {
         const command = require(file);
 
         if(!command.name)
-        return Table.addRow(fie.split("/")[7], "⛔ FAILED", "Missing a name.")
+        return Table.addRow(file.split("/")[7], "⛔ FAILED", "Missing a name.")
 
         if(!command.description)
         return Table.addRow(command.name, "⛔ FAILED", "Missing a description.")
@@ -27,7 +27,7 @@ module.exports = async (client) => {
             if(Perms.includes(command.permission))
             command.defaultPermission = false;
             else
-            return Table.addRow(fie.split("/")[7], "⛔ FAILED", "Permission is invalid")
+            return Table.addRow(file.split("/")[7], "⛔ FAILED", "Permission is invalid")
         }
 
         client.commands.set(command.name, command);

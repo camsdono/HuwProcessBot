@@ -5,9 +5,9 @@ const PG = promisify(glob);
 const Ascii = require("ascii-table");
 
 module.exports = async (client) => {
-    const Table = new Ascii("events loaded");
+    const Table = new Ascii("Events Loaded");
 
-    (await PG (`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
+    (await PG (`${process.cwd()}/events/*.js`)).map(async (file) => {
         const event = require(file);
         
         if(!Events.includes(event.name) || !event.name) {

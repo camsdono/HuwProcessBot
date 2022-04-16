@@ -1,18 +1,14 @@
 {
-  "name": "test-bot",
+  "name": "bot",
   "version": "1.0.0",
-  "description": "bot",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "beam",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "ascii-table": "^0.0.9",
-    "discord.js": "^13.6.0",
-    "glob": "^8.0.1",
-    "promisify": "^0.0.3",
-    "util": "^0.12.4"
+    "discord.js": "^13.6.0"
   }
 }

@@ -2,6 +2,7 @@ exports.run = async (client, message, args) => {
     message.channel.send(`Pong! \`${client.ws.ping}ms\``);
 }
 
-exports.help = {
-    name:"ping"
+module.exports = {
+    name: "ping",
+    description: "Tests Bots Speed",
 }

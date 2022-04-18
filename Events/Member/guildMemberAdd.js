@@ -9,7 +9,7 @@ module.exports = {
     execute(member) {
         const { user, guild } = member;
 
-        member.roles.add("963534786775887902");
+        member.roles.add("963534786775887902"); // Auto Role on user join
         
         const Welcomer = new WebhookClient({
             id: "963535319255351417",

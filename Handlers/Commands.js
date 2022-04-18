@@ -36,12 +36,34 @@ module.exports = async (client) => {
         await Table.addRow(command.name, "✔ Sucessful");
     });
 
+    (await PG(`${process.cwd()}/commands/*/*/*.js`)).map(async (file) => {
+        const command = require(file);
+
+        if(!command.name)
+        return Table.addRow(file.split("/")[7], "⛔ FAILED", "Missing a name.")
+
+        if(!command.description)
+        return Table.addRow(command.name, "⛔ FAILED", "Missing a description.")
+
+        if(command.permission) {
+            if(Perms.includes(command.permission))
+            command.defaultPermission = false;
+            else
+            return Table.addRow(file.split("/")[7], "⛔ FAILED", "Permission is invalid")
+        }
+
+        client.commands.set(command.name, command);
+        CommandsArray.push(command);
+
+        await Table.addRow(command.name, "✔ Sucessful");
+    });
+
     console.log(Table.toString());
 
-    // PERMISSIOS CHECK //
+    // Permission CHECK //
 
     client.on("ready", async () => {
-        const MainGuild = await client.guilds.cache.get("872172580893765763");
+        const MainGuild = await client.guilds.cache.get("872172580893765763"); //Server Id
 
         MainGuild.commands.set(CommandsArray).then(async (command) => {
             const Roles = (commandName) => {

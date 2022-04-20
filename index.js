@@ -8,9 +8,16 @@ const client = new Discord.Client({
     ]
 })
 
-client.commands = new Collection()
+client.commands = new Collection();
+client.cooldowns = new Collection();
 
-require("./Handlers/Events")(client)
-require("./Handlers/Commands")(client)
+['EventHandler', 'CommandHandler'].forEach(handler => {
+    require(`./Handlers/${handler}`)(client, Discord);
+});
+
+['Events', 'Commands'].forEach(handler => {
+    require(`./Handlers/${handler}`)(client, Discord);
+});
+
 
 client.login(Token);
